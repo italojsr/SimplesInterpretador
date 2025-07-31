@@ -9,6 +9,7 @@ public class Scanner {
     
     static {
         keywords = new HashMap<>();
+        keywords.put("print", TokenType.PRINT);
         keywords.put("let",    TokenType.LET);
     }
 	public Scanner (byte[] input) {
