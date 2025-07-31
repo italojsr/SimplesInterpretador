@@ -20,33 +20,19 @@ public class Scanner {
         }
     }
 
-
-
-    public enum TokenType {
-        PLUS,MINUS,
-
-        // Literals.
-        NUMBER,
-        
-            EOF
-    }
-
-    public class Token {
-
-        final TokenType type;
-        final String lexeme;
-
-        public Token (TokenType type, String lexeme) {
-            this.type = type;
-            this.lexeme = lexeme;
+    private void skipWhitespace() {
+            char ch = peek();
+            while (ch == ' ' || ch == '\r' || ch == '\t' || ch == '\n') {
+                advance();
+                ch = peek();
+            }
         }
 
         public String toString() {
             return "<"+ type +">" + lexeme + "</"+ type + ">";
         }
         
-    }
-        
+    
     private Token number() {
             int start = current ;
             while (Character.isDigit(peek())) {
@@ -58,6 +44,7 @@ public class Scanner {
         }
 
     public Token nextToken () {
+            skipWhitespace();
             char ch = peek();
             if (ch == '0') {
                 advance();
