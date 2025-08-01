@@ -1,6 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Parser {
     private Scanner scan;
     private Token currentToken;
+    private List<String> outputCommands = new ArrayList<>();
 
     public Parser(byte[] input) {
         scan = new Scanner(input);
@@ -14,7 +19,9 @@ public class Parser {
     public void parse() {
         statements();
     }
-
+    public String getOutput() {
+        return outputCommands.stream().collect(Collectors.joining(System.getProperty("line.separator")));
+    }
     private void match(TokenType t) {
             if (currentToken.type == t) {
                 nextToken();
